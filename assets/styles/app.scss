@@ -9,12 +9,41 @@ h2,
 h3,
 h4,
 h5,
-p {
+p,
+a,
+li {
     font-family: 'Open Sans', sans-serif;
 }
 
 
 
 h1 {
-    color: $dark-primary;
+    color: $secondary;
+}
+
+.logo {
+    height:70px;
+}
+.nav-item button {
+    color: rgb(102, 102, 102);
+    font-size: $sub-text;
+
+}
+
+.dropdown-menu p{
+    font-size: $sub-text;
+}
+
+.dropdown-menu p:hover{
+    color: $secondary;
+}
+
+.nav-item button:hover {
+    background-color: lightgray;
+    color:$secondary;
+    border-radius: 20px;
+}
+
+.navbar {
+    box-shadow: 3px 3px 5px rgb(180, 180, 180);
 }
