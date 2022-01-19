@@ -23,3 +23,6 @@ require('bootstrap');
 $(document).ready(function() {
     $('[data-toggle="popover"]').popover();
 });
+
+//Import bootstrap Icon
+import 'bootstrap-icons/font/bootstrap-icons.css'; 
