@@ -1,0 +1,15 @@
+@import "variable.scss";
+@import "~bootstrap/scss/bootstrap";
+
+body {
+    background-color: rgb(235, 235, 235);
+}
+
+.avatar {
+    height: 40px;
+    aspect-ratio: 1 / 1;
+}
+
+.post-form {
+    box-shadow: 3px 3px 5px rgb(180, 180, 180);
+}

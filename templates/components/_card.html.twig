@@ -1,8 +1,8 @@
 <div class="col-sm-6 col-lg-4">
 	<div class="card px-0 my-4">
 		<div class="card-header py-3">
-			<img src="{{ asset('build/images/')}}{{app.user.profilPicture}}" alt="avatar" class="avatar rounded-circle me-2">
-			{{app.user.firstname}}
+			<img src="{{ asset('build/images/')}}{{post.owner.profilPicture}}" alt="avatar" class="avatar rounded-circle me-2">
+			{{post.owner.firstname}}
 		</div>
         <img src="{{ asset('build/images/')}}{{ post.photo }}" alt="post photo" class="postpicture">
 		<div class="card-body p-3">
