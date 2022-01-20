@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/post")
+ * @Route("/publications")
  */
 class PostController extends AbstractController
 {
@@ -23,6 +23,17 @@ class PostController extends AbstractController
     {
         return $this->render('post/index.html.twig', [
             'posts' => $postRepository->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("/mes-publications", name="post_user_show", methods={"GET"})
+     */
+    public function showUserPosts(PostRepository $postRepository): Response
+    {
+
+        return $this->render('post/userPost/index.html.twig', [
+            'posts' => $postRepository->findBy(['owner'=>$this->getUser()]),
         ]);
     }
 
