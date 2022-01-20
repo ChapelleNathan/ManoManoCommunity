@@ -6,9 +6,12 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @Vich\Uploadable
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -49,6 +52,37 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $profilPicture;
+
+    /**
+     * @Vich\UploadableField(mapping="user_pictures", fileNameProperty="profilPicture")
+     * @var File
+     */
+    private $profilPictureFile;
+
+    /**
+     * @ORM\Column(type="datetime")
+     * @var \DateTime
+     */
+    private $updatedAt;
+
+    public function setProfilPictureFile(File $image = null): self
+    {
+        $this->profilPictureFile = $image;
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($image) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->updatedAt = new \DateTime('now');
+        }
+        return $this;
+    }
+
+    public function getProfilPictureFile(): ?File
+    {
+        return $this->profilPictureFile;
+        # code...
+    }
 
     public function getId(): ?int
     {
@@ -171,6 +205,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setProfilPicture(?string $profilPicture): self
     {
         $this->profilPicture = $profilPicture;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

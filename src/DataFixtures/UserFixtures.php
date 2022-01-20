@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\User;
+use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
@@ -31,6 +32,7 @@ class UserFixtures extends Fixture
             $user->setRoles(['ROLE_USER']);
             $user->setPassword($this->passwordHasher->hashPassword($user, 'test'));
             $user->setProfilPicture('placeholder.png');
+            $user->setUpdatedAt(new DateTime('now'));
             $manager->persist($user);
             $this->addReference('user_' . $i, $user);
         }
@@ -38,6 +40,7 @@ class UserFixtures extends Fixture
         $user = new User();
         $user->setLastname('John');
         $user->setFirstname('Doe');
+        $user->setUpdatedAt(new DateTime('now'));
         $user->setEmail('john@doe.com');
         $user->setPassword($this->passwordHasher->hashPassword($user, 'user'));
         $user->setRoles(['ROLE_USER']);
