@@ -27,6 +27,7 @@ class PostController extends AbstractController
     }
 
     /**
+<<<<<<< HEAD
      * @Route("/mes-publications", name="post_user_show", methods={"GET"})
      */
     public function showUserPosts(PostRepository $postRepository): Response
@@ -39,6 +40,9 @@ class PostController extends AbstractController
 
     /**
      * @Route("/new", name="post_new", methods={"GET", "POST"})
+=======
+     * @Route("/creer", name="post_new", methods={"GET", "POST"})
+>>>>>>> 9b05d8a9a93e5aea7e46b4361075cf4d8a0d66c8
      */
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -47,6 +51,7 @@ class PostController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $post->setOwner($this->getUser());
             $entityManager->persist($post);
             $entityManager->flush();
 
