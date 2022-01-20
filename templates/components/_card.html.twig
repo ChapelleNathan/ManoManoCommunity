@@ -17,9 +17,7 @@
 						<a class="dropdown-item d-flex justify-content-start align-items-center" href="{{ path('post_edit', { id: post.id }) }}">
 							<i class="bi bi-pencil-square text-primary me-2"></i>
 							Modifier</a>
-						<a class="dropdown-item d-flex justify-content-start align-items-center" href="{{ path('post_delete', { id: post.id }) }}">
-							<i class="bi bi-trash text-primary me-2"></i>
-							Supprimer</a>
+							{{ include("post/_delete_form.html.twig") }}
 					</div>
 				</div>
 			{% endif %}
@@ -32,6 +30,7 @@
 				<a class="col-1 fs-4 " href="{{ path('post_add_fav', {id: post.id}) }}">{{ app.user.isInFavorite(post) ?
 					'<i class="bi bi-star-fill"></i>' : '<i class="bi bi-star"></i>' }}</a>
 			</div>
+
 			<p class="card-text">{{post.description}}</p>
 			<a href="{{ path('post_show', {id: post.id}) }}" class="d-flex justify-content-end">
 				<i class="bi bi-chevron-right text-right"></i>

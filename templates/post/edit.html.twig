@@ -1,13 +1,49 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Post{% endblock %}
+{% block title %}Update post
+{% endblock %}
+
+{% block stylesheets %}
+	{{ encore_entry_link_tags('form') }}
+{% endblock %}
 
 {% block body %}
-    <h1>Edit Post</h1>
+	<main class="container my-5">
+		<h1 class="text-center text-secondary mb-5 fw-bold hello">
+			Update a post</h1>
 
-    {{ include('post/_form.html.twig', {'button_label': 'Update'}) }}
+		<div class="row">
 
-    <a href="{{ path('post_index') }}">back to list</a>
+			<div class="card post-form pb-4 px-0 col-12 col-md-6 offset-md-3 d-flex flex-column justify-content-center align-items-center rounded-2 mt-4">
 
-    {{ include('post/_delete_form.html.twig') }}
+
+				<div class="card-header header-user d-flex flex-row justify-content-center align-items-center py-3">
+					<img src="{{ asset('build/images/')}}{{app.user.profilPicture}}" alt="avatar" class="avatar rounded-circle me-2">
+					<p class="fw-bold m-0 text-secondary">{{app.user.firstname}}</p>
+				</div>
+				<div class="container py-4 px-5">
+					{{ form_start(form) }}
+					<div class="form-floating my-4">
+						<div class="d-flex ">
+							{{ form_label(form.title) }}
+							{{ form_widget(form.title) }}
+						</div>
+						<div class="">
+							{{ form_label(form.description) }}
+							{{ form_widget(form.description) }}
+						</div>
+						<div class="">
+							{{ form_label(form.photo) }}
+							{{ form_widget(form.photo) }}
+						</div>
+					</div>
+				</div>
+				<button class="btn btn-primary py-2 px-3 mb-4 text-light fw-bold">{{ button_label|default('Update') }}</button>
+				{{ form_end(form) }}
+				<a href="{{ path('post_user_show') }}" class="text-secondary">
+					<i class="bi bi-box-arrow-left"></i>
+					Return</a>
+			</div>
+		</div>
+	</main>
 {% endblock %}

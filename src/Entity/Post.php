@@ -38,7 +38,7 @@ class Post
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="posts")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $owner;
+    private ?User $owner;
 
     /**
      * @ORM\ManyToMany(targetEntity=User::class, mappedBy="favorites")

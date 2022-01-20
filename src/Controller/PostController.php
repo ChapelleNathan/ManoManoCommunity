@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/publication")
+ * @Route("/posts")
  */
 class PostController extends AbstractController
 {
@@ -29,7 +29,19 @@ class PostController extends AbstractController
     }
 
     /**
-     * @Route("/creer", name="post_new", methods={"GET", "POST"})
+     * @Route("/my-posts", name="post_user_show", methods={"GET"})
+     */
+    public function showUserPosts(PostRepository $postRepository): Response
+    {
+        $posts = $postRepository->findBy(['owner'=>$this->getUser()]);
+
+        return $this->render('post/userPost/index.html.twig', [
+            'posts' => $postRepository->findBy(['owner'=>$this->getUser()]),
+        ]);
+    }
+
+    /**
+     * @Route("/new", name="post_new", methods={"GET", "POST"})
      */
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -42,7 +54,7 @@ class PostController extends AbstractController
             $entityManager->persist($post);
             $entityManager->flush();
 
-            return $this->redirectToRoute('post_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('post_user_show', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('post/new.html.twig', [
@@ -72,7 +84,7 @@ class PostController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('post_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('post_user_show', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('post/edit.html.twig', [
@@ -91,7 +103,7 @@ class PostController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('post_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('post_user_show', [], Response::HTTP_SEE_OTHER);
     }
 
     /**

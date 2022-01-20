@@ -26,6 +26,17 @@ class PostFixtures extends Fixture implements DependentFixtureInterface
             $manager->persist($post);
         }
 
+        $faker = Factory::create('fr_FR');
+        for ($i = 0; $i < self::POSTS; $i++) {
+            $post = new Post();
+            $post->setTitle($faker->lastName());
+            $post->setDescription($faker->realText());
+            $post->setPhoto('post'.rand(1, 14) .'.jpg');
+            $post->setOwner($this->getReference('user_john'));
+            $this->setReference('post_' . $i, $post);
+            $manager->persist($post);
+        }
+
         $manager->flush();
     }
 
