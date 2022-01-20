@@ -1,0 +1,13 @@
+@import "variable.scss";
+@import "~bootstrap/scss/bootstrap";
+
+.avatar {
+    height: 40px;
+    aspect-ratio: 1 / 1;
+}
+
+.postpicture {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+}
