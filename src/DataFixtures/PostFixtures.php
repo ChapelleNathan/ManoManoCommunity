@@ -19,11 +19,11 @@ class PostFixtures extends Fixture implements DependentFixtureInterface
         for ($i = 0; $i < self::POSTS; $i++) {
             $post = new Post();
             $post->setTitle($faker->lastName());
-            $post->setDescription($faker->realText($maxNbChars = 200, $indexSize = 2));
+            $post->setDescription($faker->realText());
             $post->setPhoto('post'.rand(1, 14) .'.jpg');
             $post->setOwner($this->getReference('user_'. $i));
+            $this->setReference('post_' . $i, $post);
             $manager->persist($post);
-            $this->addReference('post_' . $i, $post);
         }
 
         $manager->flush();
