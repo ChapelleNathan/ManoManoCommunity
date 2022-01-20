@@ -1,0 +1,15 @@
+<div class="col-6 offset-3 p-0">
+	<div class="card px-0 my-4">
+		<div class="card-header py-3">
+			<img src="{{ asset('build/images/')}}{{app.user.profilPicture}}" alt="avatar" class="avatar rounded-circle me-2">
+			{{app.user.firstname}}
+		</div>
+        <img src="{{ asset('build/images/')}}{{ post.photo }}" alt="post photo" class="postpicture">
+		<div class="card-body p-3">
+        
+			<h3 class="card-title fs-3 mb-3 fw-bold text-secondary">{{post.title}}</h3>
+			<p class="card-text">{{post.description}}</p>
+			<a href="{{ path('post_show', {'id': app.user.id}) }}" class="d-flex justify-content-end"><i class="bi bi-chevron-right text-right"></i></a>
+		</div>
+	</div>
+</div>

@@ -20,7 +20,7 @@ class PostFixtures extends Fixture implements DependentFixtureInterface
             $post = new Post();
             $post->setTitle($faker->lastName());
             $post->setDescription($faker->realText($maxNbChars = 200, $indexSize = 2));
-            $post->setPhoto('post'.rand(1, 14) .'jpg');
+            $post->setPhoto('post'.rand(1, 14) .'.jpg');
             $post->setOwner($this->getReference('user_'. $i));
             $manager->persist($post);
             $this->addReference('post_' . $i, $post);
