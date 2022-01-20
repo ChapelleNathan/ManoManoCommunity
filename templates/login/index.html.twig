@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}S'authentifier avec ManoMano
+{% endblock %}
+
+{% block body %}
+	{% if error %}
+		<div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+	{% endif %}
+	<main class="container">
+		<h1 class="text-center mt-5 fw-bold hello">
+			Bonjour chez vous!</h1>
+		<p class="text-center fs-4">On est ravi de vous (re)voir 👋 !</p>
+		<div class="row">
+			<div class="card col-4 offset-4 d-flex flex-column justify-content-center align-items-center rounded-2 p-3 mt-4">
+				<div class="card-text p-3 rounded-top d-flex justify-content-center align-content-center">
+					<p class="mb-0 mt-2 fw-bold text-secondary">Déjà client ?</p>
+				</div>
+				<form action="{{ path('login') }}" method="post" class="d-flex flex-column mt-2 mb-4 container">
+					<div class="form-floating mb-4">
+						<input type="text" id="username" name="_username" value="{{ last_username }}" placeholder="Adresse email" class="form-control mb-3"/>
+
+						<input type="password" id="password" name="_password" placeholder="Mot de passe" class="form-control"/>
+					</div>
+					<button type="submit" class="btn btn-primary p-3 text-light fw-bold">Se connecter</button>
+				</form>
+			</div>
+		</div>
+	</main>
+{% endblock %}
