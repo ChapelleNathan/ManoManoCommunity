@@ -20,7 +20,6 @@ final class Version20220120114910 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('DROP TABLE product-list');
         $this->addSql('ALTER TABLE comment DROP user_ID, DROP post_ID, CHANGE id id INT AUTO_INCREMENT NOT NULL, CHANGE text text VARCHAR(5000) DEFAULT NULL');
         $this->addSql('ALTER TABLE product CHANGE name name VARCHAR(255) NOT NULL, CHANGE ref ref VARCHAR(255) NOT NULL');
     }
