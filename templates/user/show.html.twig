@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello UserController!{% endblock %}
+{% block title %}{{ parent() }} - {{user.firstname}} {{user.lastname}} {% endblock %}
 {% block stylesheets %}
 {{ encore_entry_link_tags('userProfile') }}
 {% endblock %}
@@ -10,13 +10,15 @@
     <div class="row mb-4">
         <div class="offset-5 col-2 d-flex justify-content-center">
             {% if user.profilPicture == null %}
-            <img class="img-thumbnail rounded-circle" src="{{ asset('build/images/placeholder.png') }}" alt="Default profile picture">
+            <img class="img-thumbnail rounded-circle" src="{{ asset('/build/images/placeholder.png') }}"
+                alt="Default profile picture">
             {% else %}
-                <img class="img-thumbnail rounded-circle" src="{{ vich_uploader_asset(user) }}"  alt="{{ user.firstname }} {{ user.lastname }} profile picture">
+            <img class="img-thumbnail rounded-circle" src="{{ vich_uploader_asset(user) }}"
+                alt="{{ user.firstname }} {{ user.lastname }} profile picture">
             {% endif %}
         </div>
     </div>
-    <h2 class="text-center mb-3">Mes informations</h2>
+    <h2 class="text-center mb-3 text-secondary"><i class="bi bi-info-circle"></i> Mes informations</h2>
     <div class="row mb-5">
         <div class="col-8 offset-2">
             <div class="card">
@@ -31,12 +33,29 @@
             </div>
         </div>
     </div>
-    <h2 class="text-center mb-3">Mes Favoris</h2>
+    <h2 class="text-center mb-3 text-secondary"><i class="bi bi-star-fill"></i> Mes Favoris</h2>
     <div class="row mb-5">
         <div class="col-8 offset-2">
             <div class="card">
                 <div class="card-body">
-                    {# TODO Faire une boucle pour les articles favoris du user #}
+                    {% for post in user.getFavorites %}
+                    <div class="card mb-3">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="{{ asset('/build/images/') }}{{ post.photo }}" class="img-fluid rounded-start" alt="photo of {{ post.owner.firstname }} {{ post.owner.lastname }}">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ post.title }}</h5>
+                                    <p class="card-text">{{ post.description }}</p>
+                                    <a href="{{ path('post_show', {id: post.id}) }}" class="d-flex justify-content-end">
+                                        <i class="bi bi-chevron-right text-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
