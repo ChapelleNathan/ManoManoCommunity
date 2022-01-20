@@ -1,15 +1,37 @@
 <div class="col-sm-6 col-lg-4">
 	<div class="card px-0 my-4">
-		<div class="card-header py-3">
-			<img src="{{ asset('build/images/')}}{{post.owner.profilPicture}}" alt="avatar" class="avatar rounded-circle me-2">
-			{{post.owner.firstname}}
+		<div class="card-header header-user d-flex flex-row justify-content-between py-3">
+			<div class="d-flex flex-row align-items-center">
+				<img src="{{ asset('build/images/')}}{{post.owner.profilPicture}}" alt="avatar" class="avatar rounded-circle me-2">
+				<p class="text-secondary fw-bold m-0">{{post.owner.firstname}}</p>
+			</div>
+			{% if app.user == post.owner %}
+				<div class="nav-item dropdown">
+					<button type="button" class="btn btn-light dropdown-toggle d-flex align-items-center p-2 rounded-3" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+						<div class="d-flex flex-column align-items-start">
+							<i class="bi bi-three-dots text-secondary"></i>
+						</div>
+					</button>
+					<div class="dropdown-menu dropdown-menu-end p-2" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item d-flex justify-content-start align-items-center" href="{{ path('post_edit', { id: post.id }) }}">
+							<i class="bi bi-pencil-square text-primary me-2"></i>
+							Modifier</a>
+						<a class="dropdown-item d-flex justify-content-start align-items-center" href="{{ path('post_delete', { id: post.id }) }}">
+							<i class="bi bi-trash text-primary me-2"></i>
+							Supprimer</a>
+					</div>
+				</div>
+
+			{% endif %}
 		</div>
-        <img src="{{ asset('build/images/')}}{{ post.photo }}" alt="post photo" class="postpicture">
+		<img src="{{ asset('build/images/')}}{{ post.photo }}" alt="post photo" class="postpicture">
 		<div class="card-body p-3">
-        
+
 			<h3 class="card-title fs-3 mb-3 fw-bold text-secondary">{{post.title}}</h3>
 			<p class="card-text">{{post.description}}</p>
-			<a href="{{ path('post_show', {id: post.id}) }}" class="d-flex justify-content-end"><i class="bi bi-chevron-right text-right"></i></a>
+			<a href="{{ path('post_show', {id: post.id}) }}" class="d-flex justify-content-end">
+				<i class="bi bi-chevron-right text-right"></i>
+			</a>
 		</div>
 	</div>
 </div>

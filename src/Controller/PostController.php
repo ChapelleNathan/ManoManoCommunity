@@ -31,6 +31,7 @@ class PostController extends AbstractController
      */
     public function showUserPosts(PostRepository $postRepository): Response
     {
+        $posts = $postRepository->findBy(['owner'=>$this->getUser()]);
 
         return $this->render('post/userPost/index.html.twig', [
             'posts' => $postRepository->findBy(['owner'=>$this->getUser()]),
