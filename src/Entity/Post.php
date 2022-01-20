@@ -44,10 +44,16 @@ class Post
      * @ORM\ManyToMany(targetEntity=Tag::class, inversedBy="posts", cascade={"persist"})
      */
     private ?Collection $Tags;
+  
+     /**
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="favorites")
+     */
+    private $starred;
 
     public function __construct()
     {
         $this->Tags = new ArrayCollection();
+        $this->starred = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -116,6 +122,24 @@ class Post
         if (!$this->Tags->contains($tag)) {
             $this->Tags[] = $tag;
         }
+      
+        return $this;
+    }
+  
+    /**
+     * @return Collection|User[]
+     */
+    public function getStarred(): Collection
+    {
+        return $this->starred;
+    }
+
+    public function addToStarred(User $starred): self
+    {
+        if (!$this->starred->contains($starred)) {
+            $this->starred[] = $starred;
+            $starred->addToFavorite($this);
+        }
 
         return $this;
     }
@@ -123,6 +147,15 @@ class Post
     public function removeTag(Tag $tag): self
     {
         $this->Tags->removeElement($tag);
+      
+      return $this;
+    }
+
+    public function removeFromStarred(User $starred): self
+    {
+        if ($this->starred->removeElement($starred)) {
+            $starred->removeFromFavorite($this);
+        }
 
         return $this;
     }

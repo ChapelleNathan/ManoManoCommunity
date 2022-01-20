@@ -18,7 +18,7 @@ class PostType extends AbstractType
             ->add('title', TextType::class, [
                 'label' => false,
                 'attr' => [
-                    'placeholder' => 'Titre',
+                    'placeholder' => 'Title',
                     'class' => 'form-control mb-4'
                 ]
             ])
@@ -37,7 +37,7 @@ class PostType extends AbstractType
                 ]])
 
             ->add('photo', TextType::class, ['label' => false, 'attr' => [
-                'placeholder' => 'Lien de la photo',
+                'placeholder' => 'Photo',
                 'class' => 'form-control mb-4'
             ]]);
 

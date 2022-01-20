@@ -12,12 +12,10 @@
 		<div class="row g-3">
         
 			{% for post in posts %}
-
-				{% include("components/_card.html.twig") %}
+				{% include "components/_card.html.twig" %}
 
 			{% else %}
 				no records found
-
 			{% endfor %}
 		</div>
 	</div>

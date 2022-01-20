@@ -31,7 +31,6 @@ class UserFixtures extends Fixture
             $user->setEmail($faker->email());
             $user->setRoles(['ROLE_USER']);
             $user->setPassword($this->passwordHasher->hashPassword($user, 'test'));
-            $user->setProfilPicture('placeholder.png');
             $user->setUpdatedAt(new DateTime('now'));
             $manager->persist($user);
             $this->addReference('user_' . $i, $user);
@@ -44,7 +43,6 @@ class UserFixtures extends Fixture
         $user->setEmail('john@doe.com');
         $user->setPassword($this->passwordHasher->hashPassword($user, 'user'));
         $user->setRoles(['ROLE_USER']);
-        $user->setProfilPicture('placeholder.png');
         $manager->persist($user);
         $this->addReference('user_john', $user);
 
