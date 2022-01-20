@@ -101,6 +101,6 @@ class PostController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('post_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('post_user_show', [], Response::HTTP_SEE_OTHER);
     }
 }
