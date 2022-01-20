@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My posts
+{% endblock %}
+
+{% block stylesheets %}
+	{{ encore_entry_link_tags('feed') }}
+{% endblock %}
+
+{% block body %}
+
+	<div class="container my-5">
+		<div class="row g-3">
+			<h1 class="text-center my-5">My published ideas</h1>
+			<h2 class="text-left text-secondary fw-bold fs-4">Your last posts</h2>
+			<h3 class="text-left fs-6">Create, update, delete</h3>
+			{% for post in posts %}
+				{% include "components/_card.html.twig" %}
+
+			{% else %}
+				no records found
+
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}
