@@ -41,7 +41,7 @@ class Post
     private ?User $owner;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Tag::class, inversedBy="posts", cascade={'persist'})
+     * @ORM\ManyToMany(targetEntity=Tag::class, inversedBy="posts", cascade={"persist"})
      */
     private ?Collection $Tags;
 

@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Post;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -25,7 +26,16 @@ class PostType extends AbstractType
                 'placeholder' => 'Description',
                 'class' => 'form-control mb-4 py-3'
             ]])
-            ->add('tags', TagType::class)
+            ->add('tags', CollectionType::class, [
+                'entry_type' => TagType::class,
+                'label' => 'Tag',
+                'by_reference' => false,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'entry_options' => [
+                    'label' => false
+                ]])
+
             ->add('photo', TextType::class, ['label' => false, 'attr' => [
                 'placeholder' => 'Lien de la photo',
                 'class' => 'form-control mb-4'
