@@ -1,7 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}{{ parent() }} - {{ user.firstname }} {{ user.lastname }} modification{% endblock %}
-
+{% block stylesheets %}
+{{ encore_entry_link_tags('userProfile') }}
+{% endblock %}
 {% block body %}
 <h1 class="text-center mt-5 mb-3">Mes infos personnelles</h1>
 
