@@ -66,6 +66,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var \DateTime
      */
     private $updatedAt;
+    /**
+     * @ORM\OneToMany(targetEntity=Post::class, mappedBy="owner", orphanRemoval=true)
+     */
+    private $posts;
+
+    public function __construct()
+    {
+        $this->posts = new ArrayCollection();
+    }
 
     public function setProfilPictureFile(File $image = null): self
     {
@@ -83,14 +92,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getProfilPictureFile(): ?File
     {
         return $this->profilPictureFile;
-        # code...
-     * @ORM\OneToMany(targetEntity=Post::class, mappedBy="owner", orphanRemoval=true)
-     */
-    private $posts;
-
-    public function __construct()
-    {
-        $this->posts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -226,6 +227,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+        return $this;
+    }
     /**
      * @return Collection|Post[]
      */
