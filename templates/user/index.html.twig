@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UserController!{% endblock %}
+{% block stylesheets %}
+{{ encore_entry_link_tags('userProfile') }}
+{% endblock %}
+{% block body %}
+<main class="container">
+    <h1 class="text-center my-5">Bienvenue {{ user.firstname }} {{ user.lastname }} !</h1>
+    <div class="row mb-4">
+        <div class="offset-5 col-2 d-flex justify-content-center">
+            <img class="img-thumbnail rounded-circle" src="/build/images/{{ user.profilPicture }}"
+                alt="{{ user.firstname }} {{ user.lastname }} picture">
+        </div>
+    </div>
+    <h2 class="text-center mb-3">Mes informations</h2>
+    <div class="row mb-5">
+        <div class="col-8 offset-2">
+            <div class="card">
+                <div class="card-body text-center">
+                    <p class="fs-4"><i class="bi bi-person-circle text-secondary"></i> : {{ user.lastname }} {{ user.firstname }}</p>
+                    <p class="fs-4"><i class="bi bi-envelope text-secondary"></i> : {{ user.email }}</p>
+                    <a href="" class="text-secondary text-decoration-none fs-5">Modifier <i class="bi bi-pencil-square"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h2 class="text-center mb-3">Mes Favoris</h2>
+    <div class="row mb-5">
+        <div class="col-8 offset-2">
+            <div class="card">
+                <div class="card-body">
+                    {# TODO Faire une boucle pour les articles favoris du user #}
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
