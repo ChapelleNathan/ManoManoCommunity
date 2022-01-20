@@ -16,17 +16,17 @@ class UserType extends AbstractType
             ->add('firstname', TextType::class, [
                 'attr' => ['class' => 'form-controller'],
                 'label_attr' => ['class' => 'form-label'],
-                'label' => 'Prénom'
+                'label' => 'Firstname'
             ])
             ->add('lastname', TextType::class, [
                 'attr' => ['class' => 'form-controller'],
                 'label_attr' => ['class' => 'form-label'],
-                'label' => 'Nom'
+                'label' => 'Lastname'
             ])
             ->add('profilPictureFile', VichImageType::class, [
                 'required' => false,
                 'allow_delete' => true,
-                'delete_label' => 'Supprimer',
+                'delete_label' => 'Delete',
                 'download_uri' => false
             ])
         ;
