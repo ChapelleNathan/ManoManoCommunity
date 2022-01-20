@@ -28,11 +28,22 @@ class UserFixtures extends Fixture
             $user->setLastname($faker->lastName());
             $user->setFirstname($faker->firstName());
             $user->setEmail($faker->email());
+            $user->setRoles(['ROLE_USER']);
             $user->setPassword($this->passwordHasher->hashPassword($user, 'test'));
             $user->setProfilPicture('placeholder.png');
             $manager->persist($user);
             $this->addReference('user_' . $i, $user);
         }
+
+        $user = new User();
+        $user->setLastname('John');
+        $user->setFirstname('Doe');
+        $user->setEmail('john@doe.com');
+        $user->setPassword($this->passwordHasher->hashPassword($user, 'user'));
+        $user->setRoles(['ROLE_USER']);
+        $user->setProfilPicture('placeholder.png');
+        $manager->persist($user);
+        $this->addReference('user_john', $user);
 
         $manager->flush();
     }
