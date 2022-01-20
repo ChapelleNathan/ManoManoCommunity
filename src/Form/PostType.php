@@ -25,10 +25,12 @@ class PostType extends AbstractType
                 'placeholder' => 'Description',
                 'class' => 'form-control mb-4 py-3'
             ]])
+            ->add('tags', TagType::class)
             ->add('photo', TextType::class, ['label' => false, 'attr' => [
                 'placeholder' => 'Lien de la photo',
                 'class' => 'form-control mb-4'
             ]]);
+
     }
 
     public function configureOptions(OptionsResolver $resolver): void
