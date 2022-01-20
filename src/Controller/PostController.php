@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/publications")
+ * @Route("/posts")
  */
 class PostController extends AbstractController
 {
@@ -27,7 +27,7 @@ class PostController extends AbstractController
     }
 
     /**
-     * @Route("/mes-publications", name="post_user_show", methods={"GET"})
+     * @Route("/my-posts", name="post_user_show", methods={"GET"})
      */
     public function showUserPosts(PostRepository $postRepository): Response
     {
@@ -39,7 +39,7 @@ class PostController extends AbstractController
     }
 
     /**
-     * @Route("/creer", name="post_new", methods={"GET", "POST"})
+     * @Route("/new", name="post_new", methods={"GET", "POST"})
      */
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
