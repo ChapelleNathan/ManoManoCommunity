@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PostRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -37,6 +39,16 @@ class Post
      * @ORM\JoinColumn(nullable=false)
      */
     private ?User $owner;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="favorites")
+     */
+    private $starred;
+
+    public function __construct()
+    {
+        $this->starred = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -87,6 +99,33 @@ class Post
     public function setOwner(?User $owner): self
     {
         $this->owner = $owner;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getStarred(): Collection
+    {
+        return $this->starred;
+    }
+
+    public function addToStarred(User $starred): self
+    {
+        if (!$this->starred->contains($starred)) {
+            $this->starred[] = $starred;
+            $starred->addToFavorite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFromStarred(User $starred): self
+    {
+        if ($this->starred->removeElement($starred)) {
+            $starred->removeFromFavorite($this);
+        }
 
         return $this;
     }
