@@ -15,6 +15,9 @@
 					<a class="dropdown-item rounded-3" href="">
 						<p class="p-2 m-0">Accéder à mon compte</p>
 					</a>
+					<a class="dropdown-item rounded-3" href="{{ path('app_logout') }}">
+						<p class="p-2 m-0">Se déconnecter</p>
+					</a>
 				</div>
 			</div>
 		{% else %}
@@ -26,7 +29,7 @@
 					</div>
 				</button>
 				<div class="dropdown-menu dropdown-menu-end p-2" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item rounded-3" href="">
+					<a class="dropdown-item rounded-3" href="{{ path('login') }}">
 						<p class="p-2 m-0">Je suis un particulier</p>
 					</a>
 					<a class="dropdown-item rounded-3" href="">
