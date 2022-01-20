@@ -52,7 +52,7 @@ class PostController extends AbstractController
             $entityManager->persist($post);
             $entityManager->flush();
 
-            return $this->redirectToRoute('post_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('post_user_show', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('post/new.html.twig', [
@@ -82,7 +82,7 @@ class PostController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('post_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('post_user_show', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('post/edit.html.twig', [
