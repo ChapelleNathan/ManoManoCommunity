@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Post;
+use App\Entity\User;
 use App\Form\PostType;
 use App\Repository\PostRepository;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -90,5 +92,19 @@ class PostController extends AbstractController
         }
 
         return $this->redirectToRoute('post_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    /**
+     * @Route("/{id}/favori", name="post_add_fav")
+     */
+    public function addToFavorite(Post $post, EntityManagerInterface $em): Response
+    {
+        if ($this->getUser()->isInFavorite($post)) {
+            $this->getUser()->removeFromFavorite($post);
+        } else {
+            $this->getUser()->addToFavorite($post);
+        }
+        $em->flush();
+        return $this->redirectToRoute('post_index',[],Response::HTTP_SEE_OTHER);
     }
 }

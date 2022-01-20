@@ -6,7 +6,6 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Serializable;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\HttpFoundation\File\File;
@@ -72,9 +71,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $posts;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Post::class, inversedBy="starred")
+     */
+    private $favorites;
+
     public function __construct()
     {
         $this->posts = new ArrayCollection();
+        $this->favorites = new ArrayCollection();
     }
 
     public function setProfilPictureFile(File $image = null): self
@@ -267,5 +272,34 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             'email' => $this->getEmail(),
             'password' => $this->getPassword(),
         ];
+    }
+
+    /**
+     * @return Collection|Post[]
+     */
+    public function getFavorites(): Collection
+    {
+        return $this->favorites;
+    }
+
+    public function addToFavorite(Post $favorite): self
+    {
+        if (!$this->favorites->contains($favorite)) {
+            $this->favorites[] = $favorite;
+        }
+
+        return $this;
+    }
+
+    public function removeFromFavorite(Post $favorite): self
+    {
+        $this->favorites->removeElement($favorite);
+
+        return $this;
+    }
+
+    public function isInFavorite(Post $post)
+    {
+        return $this->getFavorites()->contains($post);
     }
 }
