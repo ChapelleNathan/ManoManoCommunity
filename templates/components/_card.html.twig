@@ -9,7 +9,7 @@
         
 			<h3 class="card-title fs-3 mb-3 fw-bold text-secondary">{{post.title}}</h3>
 			<p class="card-text">{{post.description}}</p>
-			<a href="{{ path('post_show', {'id': app.user.id}) }}" class="d-flex justify-content-end"><i class="bi bi-chevron-right text-right"></i></a>
+			<a href="{{ path('post_show', {id: post.id}) }}" class="d-flex justify-content-end"><i class="bi bi-chevron-right text-right"></i></a>
 		</div>
 	</div>
 </div>
