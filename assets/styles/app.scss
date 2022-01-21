@@ -1,7 +1,7 @@
 @import "variable.scss";
 @import "~bootstrap/scss/bootstrap";
 body {
-    background-color: rgb(235, 235, 235);
+    background-color: rgb(245, 244, 244);
 }
 
 h1,
@@ -53,4 +53,17 @@ h1 {
     color: black;
 }
 
+.manomano {
+    height: 32px;
+}
+
+.cover {
+    width: 100vw;
+}
+
+.home-container {
+
+    max-width: 1190px;
+
+}
 

@@ -6,10 +6,28 @@
 
 {% block body %}
 	<div class="container-fluid">
-		<img src="{{ asset('/build/images/numero1.png') }}" alt="1">
-		<img src="{{ asset('/build/images/numero2.png') }}" alt="2">
-		<img src="{{ asset('/build/images/numero3.png') }}" alt="3">
-		<img src="{{ asset('/build/images/numero4.png') }}" alt="4">
-		<img src="{{ asset('/build/images/numero5.png') }}" alt="5">
+		<div class="container home-container mt-5">
+			<div class="card mb-3 p-2">
+				<div class="row g-0">
+					<div class="col-md-4">
+						<img src="{{ asset('build/images/logo.png') }}" class="img-fluid rounded-start" alt="...">
+					</div>
+					<div class="col-md-8">
+						<div class="card-body">
+							<h3 class="card-title text-secondary "><a href="{{ path('post_index') }}" class="">Join us!</a></h3>
+							<p class="card-text">The ManoMano family is growing, come and meet our social network, share, like, discover, and find all our articles through incredible achievements posted by the community.</p>
+							<p class="card-text d-flex flex-row justify-content-end">
+								<small class="text-muted pe-3 text-right">Last updated 3 mins ago</small>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<img src="{{ asset('/build/images/numero1.png') }}" alt="1" class="cover">
+		<img src="{{ asset('/build/images/numero2.png') }}" alt="2" class="cover">
+		<img src="{{ asset('/build/images/numero3.png') }}" alt="3" class="cover">
+		<img src="{{ asset('/build/images/numero4.png') }}" alt="4" class="cover">
+		<img src="{{ asset('/build/images/numero5.png') }}" alt="5" class="cover">
 	</div>
 {% endblock %}
