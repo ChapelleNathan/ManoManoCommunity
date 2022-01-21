@@ -12,8 +12,26 @@ class ProductFixtures extends Fixture
         [
             'name' => 'Perceuse visseuse MAKITA',
             'ref' => 'DDF482RMJ',
-            'image' => '1733926_1.jpg',
+            'image' => 'perceuse.jpg',
             'link' => 'https://www.manomano.fr/p/perceuse-visseuse-makita-18v-li-ion-40ah-2-batteries-chargeur-en-coffret-ddf482rmj-13519888',
+        ],
+        [
+            'name' => 'Planche chêne rustique 60 x 19',
+            'ref' => '336005',
+            'image' => 'planche.jpg',
+            'link' => 'https://www.manomano.fr/catalogue/p/etagere-murale-chene-rustique-60-x-19-12029459',
+        ],
+        [
+            'name' => 'Série Tanger 20x20 (carton de 1,00 m2)',
+            'ref' => '1215',
+            'image' => 'carlage.jpg',
+            'link' => 'https://www.manomano.fr/p/serie-tanger-20x20-carton-de-100-m2-19307647',
+        ],
+        [
+            'name' => 'Meuble TV DETROIT 2 tiroirs design industriel',
+            'ref' => '13370',
+            'image' => 'meubleTv.jpg',
+            'link' => 'https://www.manomano.fr/p/meuble-tv-detroit-design-industriel-13737492',
         ]
     ];
     public function load(ObjectManager $manager): void

@@ -37,7 +37,7 @@ class PostFixtures extends Fixture implements DependentFixtureInterface
             $post->setDescription($faker->realText());
             $post->setPhoto('post' . rand(1, 14) . '.jpg');
             $post->setOwner($this->getReference('user_john'));
-            $post->addProduct($this->getReference('product_0'));
+            $post->addProduct($this->getReference('product_' . array_rand(ProductFixtures::PRODUCTS)));
             for ($j = 0; $j <= 4; $j++) {
                 $post->addTag($this->getReference('tag_' . rand(0, count(TagFixtures::TAGS) - 1)));
             }
