@@ -32,7 +32,19 @@ class ProductFixtures extends Fixture
             'ref' => '13370',
             'image' => 'meubleTv.jpg',
             'link' => 'https://www.manomano.fr/p/meuble-tv-detroit-design-industriel-13737492',
-        ]
+        ],
+        [
+            'name' => 'XPOtool Banc mobile',
+            'ref' => '62808',
+            'image' => 'etabli.jpg',
+            'link' => 'https://www.manomano.fr/p/xpotool-banc-mobile-jusqua-100-kg-etabli-pliable-a-hauteur-reglable-77-107cm-inclinaison-reglable-41655556',
+        ],
+        [
+            'name' => 'Table de jardin extensible aluminium ',
+            'ref' => 'GR-T220320N-10CH012N',
+            'image' => 'table.jpg',
+            'link' => 'https://www.manomano.fr/p/table-de-jardin-extensible-aluminium-220-320cm-10-fauteuils-empilables-textiline-gris-anthracite-andra-xl-11194595',
+        ],
     ];
     public function load(ObjectManager $manager): void
     {
