@@ -47,12 +47,12 @@ class PostRepository extends ServiceEntityRepository
         ;
     }
     */
-    public function searchByRefAndTag(string $search): array
+    public function findByRefAndTag(string $search): array
     {
         return $this->createQueryBuilder('p')
-        ->join('p.products', 'pr')
-        ->where('pr.ref LIKE reference')
-        ->setParameter('reference', '%' . $search . '%')
+        ->join('p.Tags', 't')
+        ->where('t.name LIKE :tag')
+        ->setParameter('tag', '%' . $search . '%')
         ->getQuery()
         ->getResult();
     }

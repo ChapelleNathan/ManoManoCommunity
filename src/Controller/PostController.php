@@ -20,15 +20,15 @@ use Symfony\Component\Routing\Annotation\Route;
 class PostController extends AbstractController
 {
     /**
-     * @Route("/", name="post_index", methods={"GET"})
+     * @Route("/", name="post_index", methods={"GET", "POST"})
      */
     public function index(PostRepository $postRepository, Request $request): Response
     {
         $form = $this->createForm(SearchPostType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $search = $form->getData()['search'];
-            $posts = $postRepository->findByRef();
+            $search = $form->getData()['searchPost'];
+            $posts = $postRepository->findByRefAndTag($search);
         } else {
             $posts = $postRepository->findAll();
         }
