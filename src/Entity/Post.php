@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\PostRepository;
+use DateTimeImmutable;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -80,6 +81,7 @@ class Post
         $this->starred = new ArrayCollection();
         $this->Liked = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->createdAt = new DateTimeImmutable('now');
     }
 
     public function getId(): ?int
