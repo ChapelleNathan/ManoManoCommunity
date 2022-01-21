@@ -3,95 +3,101 @@
 {% block title %}Post
 {% endblock %}
 {% block stylesheets %}
-	{{ encore_entry_link_tags('showPost') }}
+{{ encore_entry_link_tags('showPost') }}
 {% endblock %}
 {% block body %}
-	<div class="container mt-5">
-		<h1 class="text-center text-secondary my-5">
-			Post of
-			{{post.owner.firstname}}</h1>
-		<div class="col-md-8 offset-md-2 px-0">
-			<div class="card px-0 my-4">
-				<div class="card-header header-user d-flex flex-row justify-content-between py-3">
-					<div class="col-2 d-flex flex-row align-items-center">
-						<img class="col-2 mx-3 image" src="{% if post.owner.profilPicture == null %} /build/images/placeholder.png {% else %} {{ vich_uploader_asset(post.owner) }} {% endif %}" alt="avatar" class="avatar rounded-circle me-2">
-						<p class="text-secondary fs-5 fw-bold m-0">{{post.owner.firstname}}</p>
-					</div>
-					{% if app.user == post.owner %}
-						<div class="nav-item dropdown">
-							<button type="button" class="btn btn-outline-dark dropdown-toggle d-flex align-items-center p-2 rounded-3" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-								<div class="d-flex flex-column align-items-start">
-									<i class="bi bi-three-dots text-secondary"></i>
-								</div>
-							</button>
-							<div class="dropdown-menu dropdown-menu-end p-2" aria-labelledby="navbarDropdown">
-								<a class="dropdown-item d-flex justify-content-start align-items-center" href="{{ path('post_edit', { id: post.id }) }}">
-									<i class="bi bi-pencil-square text-primary me-2"></i>
-									Edit</a>
-								{{ include("post/_delete_form.html.twig") }}
-							</div>
-						</div>
-					{% endif %}
+<div class="container mt-5">
+	<h1 class="text-center text-secondary my-5">
+		Post of
+		{{post.owner.firstname}}</h1>
+	<div class="col-md-8 offset-md-2 px-0">
+		<div class="card px-0 my-4">
+			<div class="card-header header-user d-flex flex-row justify-content-between py-3">
+				<div class="col-2 d-flex flex-row align-items-center">
+					<img class="col-2 mx-3 image"
+						src="{% if post.owner.profilPicture == null %} /build/images/placeholder.png {% else %} {{ vich_uploader_asset(post.owner) }} {% endif %}"
+						alt="avatar" class="avatar rounded-circle me-2">
+					<p class="text-secondary fs-5 fw-bold m-0">{{post.owner.firstname}}</p>
 				</div>
-				<img src="{{ asset('build/images/')}}{{ post.photo }}" alt="post photo" class="postpicture">
-				<div class="card-body px-4 p-3">
-					<div class="row">
-						<h3 class="col-8 card-title fs-3 my-3 fw-bold text-secondary">{{post.title}}</h3>
-						{% if is_granted('ROLE_USER') %}
-							<div class="col-2">
-								<a class="fs-4 text-decoration-none" href="{{ path('post_add_like', {id: post.id}) }}">
-									{{ app.user.isLiked(post) ?
+				{% if app.user == post.owner %}
+				<div class="nav-item dropdown">
+					<button type="button"
+						class="btn btn-outline-dark dropdown-toggle d-flex align-items-center p-2 rounded-3" href="#"
+						id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+						<div class="d-flex flex-column align-items-start">
+							<i class="bi bi-three-dots text-secondary"></i>
+						</div>
+					</button>
+					<div class="dropdown-menu dropdown-menu-end p-2" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item d-flex justify-content-start align-items-center"
+							href="{{ path('post_edit', { id: post.id }) }}">
+							<i class="bi bi-pencil-square text-primary me-2"></i>
+							Edit</a>
+						{{ include("post/_delete_form.html.twig") }}
+					</div>
+				</div>
+				{% endif %}
+			</div>
+			<img src="/uploads/images/posts/{{ post.photo }}" alt="post photo" class="postpicture">
+			<div class="card-body px-4 p-3">
+				<div class="row">
+					<h3 class="col-8 card-title fs-3 my-3 fw-bold text-secondary">{{post.title}}</h3>
+				</div>
+				<div class="row justify-content-around">
+					{% if is_granted('ROLE_USER') %}
+					<div class="col-2">
+						<a class="fs-4 text-decoration-none" href="{{ path('post_add_like', {id: post.id}) }}">
+							{{ app.user.isLiked(post) ?
 							'<i class="bi bi-heart-fill me-2"></i>' :
 							'<i class="bi bi-heart me-2"></i>'
 							}}{{ post.Liked|length }}</a>
-							</div>
-							<div class="col-2">
-								<a class="col-3 fs-4 text-decoration-none " href="{{ path('post_add_fav', {id: post.id}) }}">{{
+					</div>
+					<div class="col-3">
+						<a class="fs-4 text-decoration-none " href="{{ path('post_add_fav', {id: post.id}) }}">{{
 							app.user.isInFavorite(post) ?
-							'<p><i class="bi bi-star-fill"></i> Stop following</p>' : '<p><i class="bi bi-star"></i>
+							'<p class="fs-5"><i class="fs-4 bi bi-star-fill"></i> Stop following</p>' : '<p><i
+									class="bi bi-star"></i>
 								Follow
 							</p>' }}
-								</a>
-							</div>
+						</a>
+					</div>
+					{% endif %}
+				</div>
+				<p class="card-text fs-5">{{post.description}}</p>
+				<div>
+					{% for tag in post.tags %}
 
-						{% endif %}
-					</div>
-					<p class="card-text fs-5">{{post.description}}</p>
-					<div>
-						{% for tag in post.tags %}
-
-							<span class="badge rounded-pill bg-secondary px-3 py-2 m-2 fs-5">#{{tag.name}}</span>
-						{% endfor %}
-					</div>
-					<div class="d-flex flex-row justify-content-between align-items-center me-3">
-						<a class="btn btn-primary text-light my-4 m-3" href="{{ path('post_index') }}">
-							<i class="bi bi-arrow-left fw-bold"></i>
-							Return</a>
-						<p class="m-0">{{post.createdAt|date('d-m-Y')}}
-						</p>
-					</div>
+					<span class="badge rounded-pill bg-secondary px-3 py-2 m-2 fs-5">#{{tag.name}}</span>
+					{% endfor %}
+				</div>
+				<div class="d-flex flex-row justify-content-between align-items-center me-3">
+					<a class="btn btn-primary text-light my-4 m-3" href="{{ path('post_index') }}">
+						<i class="bi bi-arrow-left fw-bold"></i>
+						Return</a>
+					<p class="m-0">{{post.createdAt|date('d-m-Y')}}
+					</p>
 				</div>
 			</div>
 		</div>
 	</div>
-
-	<div class="container mb-5">
-		<h2 class="text-secondary offset-md-2 mt-5 mb-3">
-			What I bought on ManoMano</h2>
-		<div class="row g-2 mt-4">
-			<div class="col-md-8 offset-md-2">
-				{% for product in post.products %}
-					<div class="card col-md-4 px-0">
-						<img src="{{ asset('/build/images/') }}{{ product.image }}" class="card-img-top" alt="image product">
-						<div class="card-body">
-							<h5 class="card-title text-secondary fs-5">{{product.name}}</h5>
-							<p class="card-text">Ref
-								{{product.ref}}</p>
-							<a href="{{product.link}}" class="btn btn-primary text-light fw-bold ">Voir le produit</a>
-						</div>
-					</div>
-				{% endfor %}
+</div>
+<div class="container ">
+	<h2 class="text-secondary offset-md-2 mt-5 mb-3">
+		What I bought on ManoMano</h2>
+	<div class="row g-2 mt-4">
+		<div class="col-md-8 offset-md-2 my-3">
+			{% for product in post.products %}
+			<div class="card col-md-4 px-0">
+				<img src="{{ asset('/build/images/') }}{{ product.image }}" class="card-img-top" alt="image product">
+				<div class="card-body">
+					<h5 class="card-title text-secondary fs-5">{{product.name}}</h5>
+					<p class="card-text">Ref
+						{{product.ref}}</p>
+					<a href="{{product.link}}" class="btn btn-primary text-light fw-bold"><i class="bi bi-bag"></i> Buy</a>
+				</div>
 			</div>
+			{% endfor %}
 		</div>
 	</div>
+</div>
 {% endblock %}
