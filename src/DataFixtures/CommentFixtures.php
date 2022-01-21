@@ -16,7 +16,7 @@ class CommentFixtures extends Fixture implements DependentFixtureInterface
     {
 
         $faker = Factory::create('fr_FR');
-        for ($i = 0; $i < self::POSTS; $i++) {
+        for ($i = 0; $i < self::POSTS; $i++) {            
             $comment = new Comment();
             $comment->setText($faker->text());
             $comment->setAuthor($this->getReference('user_' . $i));
