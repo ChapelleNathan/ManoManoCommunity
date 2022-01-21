@@ -83,11 +83,11 @@
 </div>
 <div class="container ">
 	<h2 class="text-secondary offset-md-2 mt-5 mb-3">
-		What I bought on ManoMano</h2>
-	<div class="row g-2 mt-4">
-		<div class="col-md-8 offset-md-2 my-3">
+		What I bought on ManoMano
+	</h2>
+	<div class="row g-2 mt-4 offset-2">
 			{% for product in post.products %}
-			<div class="card col-md-4 px-0">
+			<div class="card g-3 col-md-3 px-0">
 				<img src="{{ asset('/build/images/') }}{{ product.image }}" class="card-img-top" alt="image product">
 				<div class="card-body">
 					<h5 class="card-title text-secondary fs-5">{{product.name}}</h5>
@@ -97,7 +97,6 @@
 				</div>
 			</div>
 			{% endfor %}
-		</div>
 	</div>
 </div>
 {% endblock %}
