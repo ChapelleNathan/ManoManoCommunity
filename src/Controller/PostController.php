@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Post;
 use App\Entity\User;
 use App\Form\PostType;
+use App\Form\SearchPostType;
 use App\Repository\PostRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -21,10 +22,19 @@ class PostController extends AbstractController
     /**
      * @Route("/", name="post_index", methods={"GET"})
      */
-    public function index(PostRepository $postRepository): Response
+    public function index(PostRepository $postRepository, Request $request): Response
     {
+        $form = $this->createForm(SearchPostType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $search = $form->getData()['search'];
+            $posts = $postRepository->findByRef();
+        } else {
+            $posts = $postRepository->findAll();
+        }
         return $this->render('post/index.html.twig', [
-            'posts' => $postRepository->findAll(),
+            'form' => $form->createView(),
+            'posts' => $posts,
         ]);
     }
 

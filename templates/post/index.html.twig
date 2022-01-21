@@ -4,19 +4,25 @@
 {% endblock %}
 
 {% block stylesheets %}
-	{{ encore_entry_link_tags('feed') }}
+{{ encore_entry_link_tags('feed') }}
 {% endblock %}
 
 {% block body %}
-	<div class="container my-5">		
-		<div class="row g-3">
-        
-			{% for post in posts %}
-				{% include "components/_card.html.twig" %}
-
-			{% else %}
-				no records found
-			{% endfor %}
+<div class="container my-5">
+	<div class="row g-3">
+		{{ form_start(form) }}
+		{{ form_label(form.searchPost) }}
+		<div class="input-group">
+			{{ form_widget(form.searchPost) }}
+			<button class="btn btn-outline-secondary" type="button"><i class="bi bi-search"></i></button>
+			<button class="btn btn-outline-primary" type="button"><i class="bi bi-arrow-clockwise"></i></button>
 		</div>
+		{{ form_end(form) }}
+		{% for post in posts %}
+		{% include "components/_card.html.twig" %}
+		{% else %}
+		no records found
+		{% endfor %}
 	</div>
+</div>
 {% endblock %}
