@@ -51,8 +51,11 @@ class PostRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('p')
         ->join('p.Tags', 't')
+        ->join('p.products', 'pr')
         ->where('t.name LIKE :tag')
+        ->orWhere('pr.ref LIKE :ref')
         ->setParameter('tag', '%' . $search . '%')
+        ->setParameter('ref', '%' . $search . '%')
         ->getQuery()
         ->getResult();
     }
