@@ -23,14 +23,16 @@ class Comment
     private $text;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity=User::class)
      */
-    private $owner_id;
+    private $author;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity=Post::class, inversedBy="comments")
      */
-    private $post_id;
+    private $post;
+
+    
 
     public function getId(): ?int
     {
@@ -49,26 +51,26 @@ class Comment
         return $this;
     }
 
-    public function getOwnerId(): ?int
+    public function getAuthor(): ?User
     {
-        return $this->owner_id;
+        return $this->author;
     }
 
-    public function setOwnerId(int $owner_id): self
+    public function setAuthor(?User $author): self
     {
-        $this->owner_id = $owner_id;
+        $this->author = $author;
 
         return $this;
     }
 
-    public function getPostId(): ?int
+    public function getPost(): ?Post
     {
-        return $this->post_id;
+        return $this->post;
     }
 
-    public function setPostId(int $post_id): self
+    public function setPost(?Post $post): self
     {
-        $this->post_id = $post_id;
+        $this->post = $post;
 
         return $this;
     }
