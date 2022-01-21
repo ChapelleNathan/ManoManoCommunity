@@ -66,6 +66,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var \DateTime
      */
     private $updatedAt;
+
     /**
      * @ORM\OneToMany(targetEntity=Post::class, mappedBy="owner", orphanRemoval=true)
      */

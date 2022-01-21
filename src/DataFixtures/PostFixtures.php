@@ -3,6 +3,8 @@
 namespace App\DataFixtures;
 
 use App\Entity\Post;
+use DateTime;
+use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -21,6 +23,7 @@ class PostFixtures extends Fixture implements DependentFixtureInterface
             $post->setTitle($faker->lastName());
             $post->setDescription($faker->realText());
             $post->setPhoto('post' . rand(1, 14) . '.jpg');
+            $post->setUpdatedAt(new DateTimeImmutable('now'));
             $post->setOwner($this->getReference('user_' . $i));
             for ($j = 0; $j <= 4; $j++) {
                 $post->addTag($this->getReference('tag_' . rand(0, count(TagFixtures::TAGS) - 1)));
@@ -37,6 +40,9 @@ class PostFixtures extends Fixture implements DependentFixtureInterface
             $post->setDescription($faker->realText());
             $post->setPhoto('post' . rand(1, 14) . '.jpg');
             $post->setOwner($this->getReference('user_john'));
+            
+            $post->setUpdatedAt(new DateTimeImmutable('now'));
+
             $post->addProduct($this->getReference('product_' . array_rand(ProductFixtures::PRODUCTS)));
             for ($j = 0; $j <= 4; $j++) {
                 $post->addTag($this->getReference('tag_' . rand(0, count(TagFixtures::TAGS) - 1)));
