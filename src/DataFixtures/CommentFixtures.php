@@ -19,6 +19,7 @@ class CommentFixtures extends Fixture implements DependentFixtureInterface
         for ($i = 0; $i < self::POSTS; $i++) {
             $post = new Comment();
             $post->setText($faker->text());
+            
             $manager->persist($post);
             $this->addReference('post_' . $i, $post);
         }

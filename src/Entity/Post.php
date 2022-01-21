@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\PostRepository;
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -55,6 +56,11 @@ class Post
      * @ORM\ManyToMany(targetEntity=User::class, mappedBy="favorites")
      */
     private $starred;
+
+    /**
+     * @ORM\Column(type="datetime_immutable")
+     */
+    private DateTimeInterface $createdAt;
 
     public function __construct()
     {
@@ -162,6 +168,18 @@ class Post
         if ($this->starred->removeElement($starred)) {
             $starred->removeFromFavorite($this);
         }
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $createdAt): self
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }
