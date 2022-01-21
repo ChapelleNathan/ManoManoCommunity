@@ -34,8 +34,6 @@
 						'<i class="bi bi-heart-fill" ></i>' :
 						'<i class="bi bi-heart" ></i>'
 					}}{{ post.Liked|length }}</a>
-				<a class="col-1 fs-4 text-decoration-none " href="{{ path('post_add_fav', {id: post.id}) }}">{{ app.user.isInFavorite(post) ?
-					'<i class="bi bi-star-fill"></i>' : '<i class="bi bi-star"></i>' }}</a>
 				{% endif %}
 			</div>
 

@@ -127,7 +127,7 @@ class PostController extends AbstractController
             $this->getUser()->addToFavorite($post);
         }
         $em->flush();
-        return $this->redirectToRoute('post_index',[],Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('post_show',['id' => $post->getId()],Response::HTTP_SEE_OTHER);
     }
 
     /**
@@ -141,6 +141,6 @@ class PostController extends AbstractController
             $this->getUser()->addLike($post);
         }
         $em->flush();
-        return $this->redirectToRoute('post_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('post_show',['id' => $post->getId()], Response::HTTP_SEE_OTHER);
     }
 }
