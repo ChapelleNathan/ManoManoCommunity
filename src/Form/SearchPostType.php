@@ -14,7 +14,7 @@ class SearchPostType extends AbstractType
         $builder
             ->add('searchPost', TextType::class, [
                 'attr' => ['class' => 'form-control'],
-                'label' => 'Search a post',
+                'label' => 'Rechercher un post',
                 'label_attr' => ['class' => 'form-label']
             ])
         ;
