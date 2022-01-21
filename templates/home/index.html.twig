@@ -1,7 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ parent() }}{% endblock %}
+{% block title %}
+	{{ parent() }}
+{% endblock %}
 
 {% block body %}
-
+	<div class="container-fluid">
+		<img src="{{ asset('/build/images/numero1.png') }}" alt="1">
+		<img src="{{ asset('/build/images/numero2.png') }}" alt="2">
+		<img src="{{ asset('/build/images/numero3.png') }}" alt="3">
+		<img src="{{ asset('/build/images/numero4.png') }}" alt="4">
+		<img src="{{ asset('/build/images/numero5.png') }}" alt="5">
+	</div>
 {% endblock %}
