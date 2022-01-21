@@ -74,11 +74,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\ManyToMany(targetEntity=Post::class, inversedBy="starred")
+     * @ORM\JoinTable(name="user_favorites")
      */
     private $favorites;
 
     /**
      * @ORM\ManyToMany(targetEntity=Post::class, inversedBy="Liked")
+     * @ORM\JoinTable(name="user_likes")
      */
     private $Likes;
 
