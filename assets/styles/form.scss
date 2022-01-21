@@ -21,3 +21,35 @@ body {
 .header-user {
     width: 100%;
 }
+
+#post_tags fieldset button {
+    width: 37px;
+    height: 37px;
+    align-self: end;
+    margin-block-end: 17px;
+    background-image: url("../images/delete.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#post_tags button {
+    width: 30px;
+    height: 30px;
+    align-self: end;
+    border-radius: 50%;
+    margin-block-end: 17px;
+    background-image: url("../images/add.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#post_tags {
+    display: flex;
+    gap:20px;
+    flex-wrap: wrap;
+}
+
+#post_tags fieldset {
+   min-width: 110px;
+   max-width: 110px;
+}

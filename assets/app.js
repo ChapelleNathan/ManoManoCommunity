@@ -31,7 +31,7 @@ a2lix_lib.sfCollection.init({
     collectionsSelector: 'form div[data-prototype]',
     manageRemoveEntry: true,
     lang: {
-      add: 'Add',
-      remove: 'Remove'
+      add: '',
+      remove: ''
     }
 })

@@ -18,7 +18,7 @@
 
 
 				<div class="card-header header-user d-flex flex-row justify-content-center align-items-center py-3">
-					<img src="{{ asset('build/images/')}}{{app.user.profilPicture}}" alt="avatar" class="avatar rounded-circle me-2">
+					<img src="{% if post.owner.profilPicture == null %} /build/images/placeholder.png {% else %} {{ vich_uploader_asset(post.owner) }} {% endif %}" alt="avatar" class="avatar rounded-circle me-2">
 					<p class="fw-bold m-0 text-secondary">{{app.user.firstname}}</p>
 				</div>
 				<div class="container py-4 px-5">
@@ -33,9 +33,17 @@
 							{{ form_widget(form.description) }}
 						</div>
 						<div class="">
+
 							{{ form_label(form.photo) }}
 							{{ form_widget(form.photo) }}
 						</div>
+						<div class="">
+							<div class="">
+								{{ form_label(form.tags, 'Tags', {'label_attr': {'class': 'text-secondary fs-5'}}) }}
+								{{ form_widget(form.tags) }}
+							</div>
+						</div>
+
 					</div>
 				</div>
 				<button class="btn btn-primary py-2 px-3 mb-4 text-light fw-bold">{{ button_label|default('Update') }}</button>
