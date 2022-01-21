@@ -2,13 +2,13 @@
 @import "~bootstrap/scss/bootstrap";
 
 .avatar {
-    height: 40px;
+    height      : 40px;
     aspect-ratio: 1 / 1;
 }
 
 .postpicture {
-    width: 100%;
-    height: 300px;
+    width     : 100%;
+    height    : 300px;
     object-fit: cover;
 }
 
@@ -18,4 +18,12 @@
 
 .card-body {
     height: 200px;
+}
+
+.dropdown-toggle::after {
+    display: none;
+}
+
+#navbarDropdown {
+    font-size: 20px;
 }

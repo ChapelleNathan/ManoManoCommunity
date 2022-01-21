@@ -12,8 +12,8 @@
 			{% if app.user == post.owner %}
 				<div class="nav-item dropdown">
 					<button type="button" class="btn btn-light dropdown-toggle d-flex align-items-center p-2 rounded-3" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-						<div class="d-flex flex-column align-items-start">
-							<i class="bi bi-three-dots text-secondary"></i>
+						<div class="d-flex flex-column align-items-start menu">
+							<i class="bi bi-three-dots-vertical text-secondary"></i>
 						</div>
 					</button>
 					<div class="dropdown-menu dropdown-menu-end p-2" aria-labelledby="navbarDropdown">
@@ -28,13 +28,13 @@
 		<img src="{{ vich_uploader_asset(post) }}" alt="post photo" class="postpicture">
 		<div class="card-body d-flex flex-column p-3">
 			<div class="row">
-				<h3 class="card-title fs-4 mb-3 fw-bold text-primary col-9">{{post.title}}</h3>
+				<h3 class="card-title fs-5 mb-3 fw-bold text-primary col-9">{{post.title}}</h3>
 				{% if is_granted('ROLE_USER') %}
 
-					<a class="col-2 offset-1 fs-4" href="{{ path('post_add_like', {id: post.id}) }}">
+					<a class="col-2 offset-1 fs-4 text-decoration-none" href="{{ path('post_add_like', {id: post.id}) }}">
 						{{ app.user.isLiked(post) ?
-						'<i class="bi bi-heart-fill" ></i>' :
-						'<i class="bi bi-heart" ></i>'
+						'<i class="bi bi-heart-fill me-1" ></i>' :
+						'<i class="bi bi-heart me-1" ></i>'
 					}}{{ post.Liked|length }}</a>
 				{% endif %}
 			</div>
