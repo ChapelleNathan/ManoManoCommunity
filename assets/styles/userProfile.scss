@@ -1,6 +1,6 @@
 @import "variable.scss";
 
 .img-thumbnail {
-    width: 200px;
+    min-width: 200px;
     aspect-ratio: 1/1;
 }

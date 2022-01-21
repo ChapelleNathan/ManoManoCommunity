@@ -6,7 +6,7 @@
 {% endblock %}
 {% block body %}
 <main class="container">
-    <h1 class="text-center my-5">Bienvenue {{ user.firstname }} {{ user.lastname }} !</h1>
+    <h1 class="text-center my-5">Welcome {{ user.firstname }} {{ user.lastname }} !</h1>
     <div class="row mb-4">
         <div class="offset-5 col-2 d-flex justify-content-center">
             {% if user.profilPicture == null %}
@@ -18,24 +18,24 @@
             {% endif %}
         </div>
     </div>
-    <h2 class="text-center mb-3 text-secondary"><i class="bi bi-info-circle"></i> Mes informations</h2>
+    <h2 class="text-center mb-3 text-secondary"><i class="bi bi-info-circle"></i> My informations</h2>
     <div class="row mb-5">
-        <div class="col-8 offset-2">
-            <div class="card">
+        <div class="col-md-8 offset-md-2">
+            <div class="card p-3">
                 <div class="card-body text-center">
                     <p class="fs-4"><i class="bi bi-person-circle text-secondary"></i> : {{ user.lastname }} {{
                         user.firstname }}</p>
                     <p class="fs-4"><i class="bi bi-envelope text-secondary"></i> : {{ user.email }}</p>
                     <a href="{{ path('user_edit', {id: user.id}) }}"
-                        class="text-secondary text-decoration-none fs-5">Modifier <i
+                        class="text-secondary text-decoration-none fs-5">Edit <i
                             class="bi bi-pencil-square"></i></a>
                 </div>
             </div>
         </div>
     </div>
-    <h2 class="text-center mb-3 text-secondary"><i class="bi bi-star-fill"></i> Mes Favoris</h2>
+    <h2 class="text-center mb-3 text-secondary"><i class="bi bi-star-fill"></i> My Favories</h2>
     <div class="row mb-5">
-        <div class="col-8 offset-2">
+        <div class="col-md-8 offset-md-2">
             <div class="card">
                 <div class="card-body">
                     {% for post in user.getFavorites %}

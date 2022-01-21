@@ -5,7 +5,7 @@
 				<img src="{% if post.owner.profilPicture == null %} /build/images/placeholder.png {% else %} {{ vich_uploader_asset(post.owner) }} {% endif %}" alt="avatar" class="avatar rounded-circle me-2">
 				<div class="d-flex flex-column ">
 					<p class="text-secondary fs-5 fw-bold m-0">{{post.owner.firstname}}</p>
-					<p class="my-0">Publié le
+					<p class="my-0">Published
 						{{post.createdAt|date('d-m-Y')}}</p>
 				</div>
 			</div>
@@ -19,7 +19,7 @@
 					<div class="dropdown-menu dropdown-menu-end p-2" aria-labelledby="navbarDropdown">
 						<a class="dropdown-item d-flex justify-content-start align-items-center" href="{{ path('post_edit', { id: post.id }) }}">
 							<i class="bi bi-pencil-square text-primary me-2"></i>
-							Modifier</a>
+							Edit</a>
 						{{ include("post/_delete_form.html.twig") }}
 					</div>
 				</div>
