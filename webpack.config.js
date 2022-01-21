@@ -37,6 +37,7 @@ Encore
     .addStyleEntry('userProfile', './assets/styles/userProfile.scss')
     .addStyleEntry('feed', './assets/styles/feed.scss')
     .addStyleEntry('form', './assets/styles/form.scss')
+    .addStyleEntry('showPost', './assets/styles/showPost.scss')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')

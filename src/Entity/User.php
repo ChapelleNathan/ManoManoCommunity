@@ -338,4 +338,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         return $this->getLikes()->contains($post);
     }
+
+    public function addFavorite(Post $favorite): self
+    {
+        if (!$this->favorites->contains($favorite)) {
+            $this->favorites[] = $favorite;
+        }
+
+        return $this;
+    }
+
+    public function removeFavorite(Post $favorite): self
+    {
+        $this->favorites->removeElement($favorite);
+
+        return $this;
+    }
 }

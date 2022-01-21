@@ -9,9 +9,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=PostRepository::class)
+ * @Vich\Uploadable
  */
 class Post
 {
@@ -36,9 +39,8 @@ class Post
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\NotBlank
      */
-    private ?string $photo;
+    private $photo;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="posts")
@@ -75,9 +77,22 @@ class Post
     private $comments;
 
     /**
-     * @ORM\Column(type="datetime_immutable")
+     * @Vich\UploadableField(mapping="posts", fileNameProperty="photo")
+     * 
+     * @var File|null
+     */
+    private $imageFile;
+
+    /**
+     * @ORM\Column(type="datetime")
      */
     private $updatedAt;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Product::class, inversedBy="posts")
+     */
+    private $products;
+
 
 
     public function __construct()
@@ -86,6 +101,8 @@ class Post
         $this->starred = new ArrayCollection();
         $this->Liked = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->products = new ArrayCollection();
+
         $this->createdAt = new DateTimeImmutable('now');
     }
 
@@ -269,7 +286,69 @@ class Post
     public function setUpdatedAt(\DateTimeImmutable $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+        return $this;
+    }
+
+    public function addStarred(User $starred): self
+    {
+        if (!$this->starred->contains($starred)) {
+            $this->starred[] = $starred;
+            $starred->addFavorite($this);
+        }
 
         return $this;
+    }
+
+    public function removeStarred(User $starred): self
+    {
+        if ($this->starred->removeElement($starred)) {
+            $starred->removeFavorite($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Product[]
+     */
+    public function getProducts(): Collection
+    {
+        return $this->products;
+    }
+
+    public function addProduct(Product $product): self
+    {
+        if (!$this->products->contains($product)) {
+            $this->products[] = $product;
+        }
+
+        return $this;
+    }
+
+    public function removeProduct(Product $product): self
+    {
+        $this->products->removeElement($product);
+
+        return $this;
+    }
+
+    /**
+     *
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $imageFile
+     */
+    public function setImageFile(?File $imageFile = null): void
+    {
+        $this->imageFile = $imageFile;
+
+        if (null !== $imageFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
     }
 }
