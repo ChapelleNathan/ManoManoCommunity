@@ -12,39 +12,20 @@ use Faker\Factory;
 
 class PostFixtures extends Fixture implements DependentFixtureInterface
 {
-    public const POSTS = 20;
+    public const POSTS = 14;
 
     public function load(ObjectManager $manager): void
     {
-
         $faker = Factory::create('fr_FR');
         for ($i = 0; $i < self::POSTS; $i++) {
             $post = new Post();
             $post->setTitle($faker->words(rand(1, 6), true));
             $post->setDescription($faker->realText());
             $post->setPhoto('post' . rand(1, 14) . '.jpg');
-            $post->setUpdatedAt(new DateTimeImmutable('now'));
-            copy(__DIR__ . '/post'. rand(1,14).'.jpg', __DIR__ . '/../../public/uploads/posts/post'. rand(1,14).'.jpg');
             $post->setOwner($this->getReference('user_' . $i));
-            for ($j = 0; $j <= 4; $j++) {
-                $post->addTag($this->getReference('tag_' . rand(0, count(TagFixtures::TAGS) - 1)));
-            }
-            
-            $this->setReference('post_' . $i, $post);
-            $manager->persist($post);
-        }
-
-        $faker = Factory::create('fr_FR');
-        for ($i = 0; $i < self::POSTS; $i++) {
-            $post = new Post();
-            $post->setTitle($faker->words(rand(1, 6), true));
-            $post->setDescription($faker->realText());
-            $post->setPhoto('post' . rand(1, 14) . '.jpg');
-            $post->setOwner($this->getReference('user_john'));
-            
             $post->setUpdatedAt(new DateTimeImmutable('now'));
-            copy(__DIR__ . '/post'.rand(1,14).'.jpg', __DIR__ . '/../../public/uploads/posts/post'.rand(1,14).'.jpg');
-
+            $postPhoto = 'post' . ($i + 1) . '.jpg';
+            copy(__DIR__ . '/' . $postPhoto, __DIR__ . '/../../public/uploads/images/posts/' . $postPhoto);
             $post->addProduct($this->getReference('product_' . array_rand(ProductFixtures::PRODUCTS)));
             for ($j = 0; $j <= 4; $j++) {
                 $post->addTag($this->getReference('tag_' . rand(0, count(TagFixtures::TAGS) - 1)));
