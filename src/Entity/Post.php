@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\PostRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -21,18 +22,21 @@ class Post
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
-    private $title;
+    private ?string $title;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
+     * @Assert\NotBlank
      */
-    private $description;
+    private ?string $description;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\NotBlank
      */
-    private $photo;
+    private ?string $photo;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="posts")
@@ -42,6 +46,8 @@ class Post
 
     /**
      * @ORM\ManyToMany(targetEntity=Tag::class, inversedBy="posts", cascade={"persist"})
+     * @Assert\Count(max = 5)
+     * @Assert\Valid
      */
     private ?Collection $Tags;
   

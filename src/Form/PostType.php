@@ -28,7 +28,7 @@ class PostType extends AbstractType
             ]])
             ->add('tags', CollectionType::class, [
                 'entry_type' => TagType::class,
-                'label' => 'Tag',
+                'label' => 'Tags',
                 'by_reference' => false,
                 'allow_add' => true,
                 'allow_delete' => true,
