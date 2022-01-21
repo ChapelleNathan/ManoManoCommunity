@@ -26,7 +26,10 @@ class PostFixtures extends Fixture implements DependentFixtureInterface
             $post->setUpdatedAt(new DateTimeImmutable('now'));
             $postPhoto = 'post' . ($i + 1) . '.jpg';
             copy(__DIR__ . '/' . $postPhoto, __DIR__ . '/../../public/uploads/images/posts/' . $postPhoto);
-            $post->addProduct($this->getReference('product_' . array_rand(ProductFixtures::PRODUCTS)));
+
+            for ($j = 0; $j < rand(0, 5); $j++) {
+                $post->addProduct($this->getReference('product_' . array_rand(ProductFixtures::PRODUCTS)));
+            }
             for ($j = 0; $j <= 4; $j++) {
                 $post->addTag($this->getReference('tag_' . rand(0, count(TagFixtures::TAGS) - 1)));
             }
