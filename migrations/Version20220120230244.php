@@ -20,12 +20,12 @@ final class Version20220120230244 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE comment ADD owner_id INT NOT NULL, ADD post_id INT NOT NULL');
+        $this->addSql('ALTER TABLE comment ADD author_id INT NOT NULL, ADD post_id INT NOT NULL');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE comment DROP owner_id, DROP post_id');
+        $this->addSql('ALTER TABLE comment DROP author_id, DROP post_id');
     }
 }

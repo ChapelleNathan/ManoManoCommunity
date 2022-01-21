@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Post;
 use App\Entity\User;
 use App\Form\PostType;
+use App\Form\SearchPostType;
 use App\Repository\PostRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -21,10 +22,19 @@ class PostController extends AbstractController
     /**
      * @Route("/", name="post_index", methods={"GET"})
      */
-    public function index(PostRepository $postRepository): Response
+    public function index(PostRepository $postRepository, Request $request): Response
     {
+        $form = $this->createForm(SearchPostType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $search = $form->getData()['search'];
+            $posts = $postRepository->findByRef();
+        } else {
+            $posts = $postRepository->findAll();
+        }
         return $this->render('post/index.html.twig', [
-            'posts' => $postRepository->findAll(),
+            'form' => $form->createView(),
+            'posts' => $posts,
         ]);
     }
 
@@ -118,5 +128,19 @@ class PostController extends AbstractController
         }
         $em->flush();
         return $this->redirectToRoute('post_index',[],Response::HTTP_SEE_OTHER);
+    }
+
+    /**
+     * @Route("/{id}/like", name="post_add_like")
+     */
+    public function addLike(Post $post, EntityManagerInterface $em): Response
+    {
+        if ($this->getUser()->isLiked($post)) {
+            $this->getUser()->removeLike($post);
+        } else {
+            $this->getUser()->addLike($post);
+        }
+        $em->flush();
+        return $this->redirectToRoute('post_index', [], Response::HTTP_SEE_OTHER);
     }
 }

@@ -76,10 +76,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $favorites;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Post::class, inversedBy="Liked")
+     */
+    private $Likes;
+
     public function __construct()
     {
         $this->posts = new ArrayCollection();
         $this->favorites = new ArrayCollection();
+        $this->Likes = new ArrayCollection();
     }
 
     public function setProfilPictureFile(File $image = null): self
@@ -301,5 +307,34 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function isInFavorite(Post $post)
     {
         return $this->getFavorites()->contains($post);
+    }
+
+    /**
+     * @return Collection|Post[]
+     */
+    public function getLikes(): Collection
+    {
+        return $this->Likes;
+    }
+
+    public function addLike(Post $like): self
+    {
+        if (!$this->Likes->contains($like)) {
+            $this->Likes[] = $like;
+        }
+
+        return $this;
+    }
+
+    public function removeLike(Post $like): self
+    {
+        $this->Likes->removeElement($like);
+
+        return $this;
+    }
+
+    public function isLiked(Post $post): bool
+    {
+        return $this->getLikes()->contains($post);
     }
 }
