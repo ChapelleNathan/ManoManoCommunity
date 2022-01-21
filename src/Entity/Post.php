@@ -74,6 +74,11 @@ class Post
      */
     private $comments;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Product::class, inversedBy="posts")
+     */
+    private $products;
+
 
     public function __construct()
     {
@@ -81,6 +86,8 @@ class Post
         $this->starred = new ArrayCollection();
         $this->Liked = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->products = new ArrayCollection();
+
         $this->createdAt = new DateTimeImmutable('now');
     }
 
@@ -252,6 +259,49 @@ class Post
                 $comment->setPost(null);
             }
         }
+
+        return $this;
+    }
+
+    public function addStarred(User $starred): self
+    {
+        if (!$this->starred->contains($starred)) {
+            $this->starred[] = $starred;
+            $starred->addFavorite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStarred(User $starred): self
+    {
+        if ($this->starred->removeElement($starred)) {
+            $starred->removeFavorite($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Product[]
+     */
+    public function getProducts(): Collection
+    {
+        return $this->products;
+    }
+
+    public function addProduct(Product $product): self
+    {
+        if (!$this->products->contains($product)) {
+            $this->products[] = $product;
+        }
+
+        return $this;
+    }
+
+    public function removeProduct(Product $product): self
+    {
+        $this->products->removeElement($product);
 
         return $this;
     }

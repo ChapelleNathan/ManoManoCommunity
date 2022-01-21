@@ -21,6 +21,7 @@ final class Version20220120230244 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE comment ADD author_id INT NOT NULL, ADD post_id INT NOT NULL');
+        $this->addSql('CREATE TABLE post_product (post_id INT NOT NULL, product_id INT NOT NULL)');
     }
 
     public function down(Schema $schema): void

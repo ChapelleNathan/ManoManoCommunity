@@ -30,6 +30,7 @@
 			<div class="row">
 				<h3 class="card-title fs-4 mb-3 fw-bold text-primary col-9">{{post.title}}</h3>
 				{% if is_granted('ROLE_USER') %}
+
 					<a class="col-2 fs-4" href="{{ path('post_add_like', {id: post.id}) }}">
 						{{ app.user.isLiked(post) ?
 						'<i class="bi bi-heart-fill" ></i>' :
